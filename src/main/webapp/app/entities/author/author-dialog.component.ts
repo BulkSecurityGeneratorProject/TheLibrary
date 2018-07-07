@@ -18,6 +18,7 @@ export class AuthorDialogComponent implements OnInit {
 
     author: Author;
     isSaving: boolean;
+    birthDateDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

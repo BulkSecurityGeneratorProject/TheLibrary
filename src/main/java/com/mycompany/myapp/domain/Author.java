@@ -9,6 +9,7 @@ import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -31,6 +32,9 @@ public class Author implements Serializable {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
 
     @OneToMany(mappedBy = "author")
     @JsonIgnore
@@ -57,6 +61,19 @@ public class Author implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public Author birthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+        return this;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public Set<Book> getBooks() {
@@ -110,6 +127,7 @@ public class Author implements Serializable {
         return "Author{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", birthDate='" + getBirthDate() + "'" +
             "}";
     }
 }

@@ -3,6 +3,8 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from '../../app.constants';
 
+import { JhiDateUtils } from 'ng-jhipster';
+
 import { Author } from './author.model';
 import { createRequestOption } from '../../shared';
 
@@ -14,7 +16,7 @@ export class AuthorService {
     private resourceUrl =  SERVER_API_URL + 'api/authors';
     private resourceSearchUrl = SERVER_API_URL + 'api/_search/authors';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private dateUtils: JhiDateUtils) { }
 
     create(author: Author): Observable<EntityResponseType> {
         const copy = this.convert(author);
@@ -68,6 +70,8 @@ export class AuthorService {
      */
     private convertItemFromServer(author: Author): Author {
         const copy: Author = Object.assign({}, author);
+        copy.birthDate = this.dateUtils
+            .convertLocalDateFromServer(author.birthDate);
         return copy;
     }
 
@@ -76,6 +80,8 @@ export class AuthorService {
      */
     private convert(author: Author): Author {
         const copy: Author = Object.assign({}, author);
+        copy.birthDate = this.dateUtils
+            .convertLocalDateToServer(author.birthDate);
         return copy;
     }
 }

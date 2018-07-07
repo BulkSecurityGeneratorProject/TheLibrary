@@ -15,6 +15,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "birthDate",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20180707184819",

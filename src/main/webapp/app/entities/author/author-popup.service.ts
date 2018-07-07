@@ -29,6 +29,13 @@ export class AuthorPopupService {
                 this.authorService.find(id)
                     .subscribe((authorResponse: HttpResponse<Author>) => {
                         const author: Author = authorResponse.body;
+                        if (author.birthDate) {
+                            author.birthDate = {
+                                year: author.birthDate.getFullYear(),
+                                month: author.birthDate.getMonth() + 1,
+                                day: author.birthDate.getDate()
+                            };
+                        }
                         this.ngbModalRef = this.authorModalRef(component, author);
                         resolve(this.ngbModalRef);
                     });

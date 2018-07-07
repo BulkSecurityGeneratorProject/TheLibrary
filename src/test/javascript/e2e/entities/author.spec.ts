@@ -35,6 +35,8 @@ describe('Author e2e test', () => {
         authorComponentsPage.clickOnCreateButton();
         authorDialogPage.setNameInput('name');
         expect(authorDialogPage.getNameInput()).toMatch('name');
+        authorDialogPage.setBirthDateInput('2000-12-31');
+        expect(authorDialogPage.getBirthDateInput()).toMatch('2000-12-31');
         authorDialogPage.save();
         expect(authorDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -62,6 +64,7 @@ export class AuthorDialogPage {
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
     nameInput = element(by.css('input#field_name'));
+    birthDateInput = element(by.css('input#field_birthDate'));
 
     getModalTitle() {
         return this.modalTitle.getText();
@@ -73,6 +76,14 @@ export class AuthorDialogPage {
 
     getNameInput = function() {
         return this.nameInput.getAttribute('value');
+    };
+
+    setBirthDateInput = function(birthDate) {
+        this.birthDateInput.sendKeys(birthDate);
+    };
+
+    getBirthDateInput = function() {
+        return this.birthDateInput.getAttribute('value');
     };
 
     save() {
