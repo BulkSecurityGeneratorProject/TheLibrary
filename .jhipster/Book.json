@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "author",
+            "otherEntityName": "author",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "pricw",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20180707184955",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "book",
+    "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll"
+}
