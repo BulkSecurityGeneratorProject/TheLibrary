@@ -92,6 +92,14 @@ export class BookComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
 
+    findCheap() {
+         this.books = [];
+         this.bookService.findCheap().subscribe(
+           (res: HttpResponse<Book[]>) => this.onSuccess(res.body, res.headers),
+           (res: HttpErrorResponse) => this.onError(res.message)
+       );
+        }
+
     search(query) {
         if (!query) {
             return this.clear();

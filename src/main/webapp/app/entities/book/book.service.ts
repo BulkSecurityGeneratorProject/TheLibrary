@@ -13,6 +13,7 @@ export class BookService {
 
     private resourceUrl =  SERVER_API_URL + 'api/books';
     private resourceSearchUrl = SERVER_API_URL + 'api/_search/books';
+    private resourceSearchCheaoUrl= SERVER_API_URL + 'api/_search/cheapbooks';
 
     constructor(private http: HttpClient) { }
 
@@ -46,6 +47,12 @@ export class BookService {
     search(req?: any): Observable<HttpResponse<Book[]>> {
         const options = createRequestOption(req);
         return this.http.get<Book[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
+            .map((res: HttpResponse<Book[]>) => this.convertArrayResponse(res));
+    }
+
+    findCheap(req?: any): Observable<HttpResponse<Book[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Book[]>(this.resourceSearchCheaoUrl, { params: options, observe: 'response' })
             .map((res: HttpResponse<Book[]>) => this.convertArrayResponse(res));
     }
 

@@ -154,4 +154,15 @@ public class BookResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/_search/cheapbooks")
+    @Timed
+    public ResponseEntity<List<Book>> cheapBooks(Pageable pageable) {
+        log.debug("REST request to search for a page of Books for query {}");
+
+        //TODO use searchRepository
+        Page<Book> page = bookRepository.findCheapBooks(pageable);
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders("Books under 20",page, "/api/_search/cheapbooks");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
 }
