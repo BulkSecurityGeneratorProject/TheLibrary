@@ -3,6 +3,9 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+
 
 import { Author } from './author.model';
 import { AuthorService } from './author.service';
@@ -32,7 +35,8 @@ export class AuthorComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private parseLinks: JhiParseLinks,
         private activatedRoute: ActivatedRoute,
-        private principal: Principal
+        private principal: Principal,
+        private http: HttpClient
     ) {
         this.authors = [];
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -106,6 +110,15 @@ export class AuthorComponent implements OnInit, OnDestroy {
         this.currentSearch = query;
         this.loadAll();
     }
+
+    getReviews(author, bookApi) {
+            var req = [];
+            req.api-key = '9321a59238d548b386edf6c2ddf7e5ee';
+            req.author = author;
+
+            this.http.get(bookApi, { params: req, observe: 'response' }).map((res:Response) => res.json());
+    }
+
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then((account) => {

@@ -64,10 +64,14 @@
                             <span class="fa fa-remove"></span>
                             <span class="d-none d-md-inline">Delete</span>
                         </button>
+                        <button (click)="getReviews(author.name,bookApi)">
+                            <span>Show reviews</span>
+                        </button>
                     </div>
                 </td>
             </tr>
             </tbody>
         </table>
+        <input type="text" class="form-control"  [(ngModel)]="bookApi" id="bookApi" name="bookApi" placeholder="Enter book API">
     </div>
 </div>
